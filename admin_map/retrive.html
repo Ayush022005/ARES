@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Data Display</title>
+</head>
+
+<body>
+    <h1>Firebase Data Display</h1>
+    <ul id="output"></ul>
+
+    <!-- Include Firebase JavaScript SDK v9 -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.4.1/firebase-app.js';
+        import { getDatabase, ref, get } from 'https://www.gstatic.com/firebasejs/9.4.1/firebase-database.js';
+        const firebaseConfig = {
+            apiKey: "AIzaSyAYWC_krsWd469OxpHtes8-_mCJCIk2uPA",
+            authDomain: "puhackthon.firebaseapp.com",
+            databaseURL: "https://puhackthon-default-rtdb.firebaseio.com",
+            projectId: "puhackthon",
+            storageBucket: "puhackthon.appspot.com",
+            messagingSenderId: "640133635938",
+            appId: "1:640133635938:web:5a97f430667fb1ac27963b",
+            measurementId: "G-KHZJSFRETD"
+        };
+
+        // Initialize Firebase
+        const firebaseApp = initializeApp(firebaseConfig);
+        const database = getDatabase(firebaseApp);
+
+        // Function to fetch data from the database and display it in HTML
+        async function fetchDataAndDisplay() {
+            const dataRef = ref(database, '/');
+            const snapshot = await get(dataRef);
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                displayData(data); // Call function to display data
+            } else {
+                console.log("No data available");
+            }
+        }
+
+        // Function to display data in HTML
+        function displayData(data) {
+                const outputDiv = document.getElementById('output');
+                outputDiv.innerHTML = ''; // Clear previous content
+                for (let key in data) {
+                    if (data.hasOwnProperty(key)) {
+                        const value = data[key];
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${key}: ${value}`;
+                        outputDiv.appendChild(listItem);
+                    }
+                }
+            }
+
+        // Call the fetchDataAndDisplay function to retrieve data and display it
+        fetchDataAndDisplay();
+    </script>
+</body>
+
+</html>

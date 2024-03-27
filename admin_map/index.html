@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Display</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .image-container {
+            width: 50%;
+            /* Adjust the width as needed */
+            max-width: 500px;
+            /* Set a max-width to prevent the image from becoming too large */
+        }
+
+        .image-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            /* Optional: Add border-radius for rounded corners */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="image-container">
+        <img id="imgElem"></img>
+    </div>
+
+    <script>
+        baseStr64 = "";
+        imgElem.setAttribute('src', "data:image/jpg;base64," + baseStr64);
+    </script>
+
+</body>
+
+</html>
+
